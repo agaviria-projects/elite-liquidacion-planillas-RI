@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Elite Ingenieros | Planilla de Liquidación RI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f3f3f3;
+    }
+
+    /* ENCABEZADO */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #f3f3f3;
+      padding: 10px 15px;
+    }
+
+    .logo {
+      width: 55px;
+      height: auto;
+      margin-right: 10px;
+    }
+
+    header h2 {
+      color: #004b2d;
+      font-weight: bold;
+      font-size: 20px;
+      white-space: nowrap;
+    }
+
+    .btn-limpiar {
+      background-color: #007f4f;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .btn-limpiar:hover {
+      background-color: #005f3b;
+    }
+
+    /* TARJETAS */
+    .card {
+      background: #fff;
+      margin: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .item { font-weight: bold; font-size: 18px; color: #222; margin-bottom: 5px; }
+    .desc { font-size: 14px; color: #444; margin-bottom: 10px; }
+
+    .valores {
+      display: flex; justify-content: space-between;
+      font-size: 14px; margin: 3px 0;
+    }
+
+    .cantidad-box {
+      display: flex; align-items: center;
+      margin: 10px 0;
+    }
+
+    .cantidad-box label { margin-right: 10px; font-weight: bold; }
+    input[type="number"] {
+      width: 90px;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .totales {
+      display: flex; justify-content: space-between;
+      font-size: 14px; margin-top: 5px;
+    }
+
+    /* RESULTADOS */
+    .resumen {
+      background: #008c4a;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .resumen div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      padding-bottom: 3px;
+    }
+
+    .resumen div:last-child {
+      border-bottom: none;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    footer img {
+      width: 50px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div style="display: flex; align-items: center;">
+      <img src="elite.png" alt="Elite Ingenieros" class="logo">
+      <h2>Planilla de Liquidación RI</h2>
+    </div>
+    <button class="btn-limpiar" onclick="limpiarTodo()">Limpiar</button>
+  </header>
+
+  <div id="contenedor-items"></div>
+
+  <div class="resumen">
+    <div><span>SUMA CANTIDADES:</span> <span id="sumaCantidades">0</span></div>
+    <div><span>VALOR ACTA EPM:</span> <span id="totalCliente">$ 0</span></div>
+    <div><span>VALOR CUADRILLA URBANA:</span> <span id="totalCuadrillaUrbana">$ 0</span></div>
+    <div><span>VALOR CUADRILLA RURAL:</span> <span id="totalCuadrillaRural">$ 0</span></div>
+  </div>
+
+  <footer>
+    <img src="elite.png" alt="Elite Ingenieros Logo">
+    © 2025 Elite Ingenieros S.A.S.
+  </footer>
+
+  <script>
+  const items = [
+    { codigo:"RI01", desc:"Instalación red interna monofásica", cliente:95000, cuadrillaU:68000, cuadrillaR:72000 },
+    { codigo:"RI02", desc:"Instalación red interna bifásica", cliente:122000, cuadrillaU:88000, cuadrillaR:94000 },
+    { codigo:"RI03", desc:"Instalación red interna trifásica", cliente:147000, cuadrillaU:102000, cuadrillaR:110000 },
+    { codigo:"RI04", desc:"Reparación o ajuste de acometida interna", cliente:73500, cuadrillaU:50000, cuadrillaR:55000 },
+    { codigo:"RI05", desc:"Suministro e instalación de tubería PVC ¾”", cliente:24300, cuadrillaU:16000, cuadrillaR:17000 },
+    { codigo:"RI06", desc:"Suministro e instalación de cable N°10 AWG cobre", cliente:7190, cuadrillaU:5200, cuadrillaR:5300 },
+    { codigo:"RI07", desc:"Cambio de caja de medidor monofásico", cliente:52600, cuadrillaU:40000, cuadrillaR:43000 },
+    { codigo:"RI08", desc:"Revisión y ajuste de bornes internos", cliente:21500, cuadrillaU:15000, cuadrillaR:16000 },
+  ];
+
+  const contenedor = document.getElementById("contenedor-items");
+
+  items.forEach((it, i) => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="item">${it.codigo}</div>
+      <div class="desc">${it.desc}</div>
+      <div class="valores">
+        <div>Valor Cliente:</div>
+        <div>${formato(it.cliente)}</div>
+      </div>
+      <div class="cantidad-box">
+        <label>Cantidad:</label>
+        <input type="number" min="0" value="" id="cant-${i}">
+      </div>
+      <div class="totales">
+        <div>Total Cliente:</div>
+        <div id="totCliente-${i}"></div>
+      </div>
+    `;
+    contenedor.appendChild(card);
+
+    document.getElementById(`cant-${i}`).addEventListener("input", actualizar);
+  });
+
+  function formato(num) {
+    return "$ " + num.toLocaleString("es-CO");
+  }
+
+  function actualizar() {
+    let sumaCant = 0, totalCli = 0, totalCuaU = 0, totalCuaR = 0;
+    const cantidades = [];
+
+    items.forEach((it, i) => {
+      const cant = parseFloat(document.getElementById(`cant-${i}`).value) || 0;
+      cantidades.push(cant);
+      sumaCant += cant;
+
+      const totCli = cant * it.cliente;
+      const totCuaU = cant * it.cuadrillaU;
+      const totCuaR = cant * it.cuadrillaR;
+
+      totalCli += totCli;
+      totalCuaU += totCuaU;
+      totalCuaR += totCuaR;
+
+      document.getElementById(`totCliente-${i}`).innerText = cant > 0 ? formato(totCli) : "";
+    });
+
+    document.getElementById("sumaCantidades").innerText = sumaCant;
+    document.getElementById("totalCliente").innerText = formato(totalCli);
+    document.getElementById("totalCuadrillaUrbana").innerText = formato(totalCuaU);
+    document.getElementById("totalCuadrillaRural").innerText = formato(totalCuaR);
+
+    // Guardar en localStorage
+    localStorage.setItem("cantidadesPlanillaRI", JSON.stringify(cantidades));
+  }
+
+  function cargarDesdeLocalStorage() {
+    const data = JSON.parse(localStorage.getItem("cantidadesPlanillaRI") || "[]");
+    data.forEach((val, i) => {
+      const campo = document.getElementById(`cant-${i}`);
+      if (campo && val) campo.value = val;
+    });
+    actualizar();
+  }
+
+  function limpiarTodo() {
+    localStorage.removeItem("cantidadesPlanillaRI");
+    items.forEach((_, i) => document.getElementById(`cant-${i}`).value = "");
+    actualizar();
+  }
+
+  window.onload = cargarDesdeLocalStorage;
+  </script>
+</body>
+</html>
