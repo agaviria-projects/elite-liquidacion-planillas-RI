@@ -152,6 +152,31 @@
   white-space: nowrap;  /* 🔹 evita que se divida en dos líneas */
   font-size: 20px;
 }
+   .footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .footer-logo {
+    width: 60px;
+    height: auto;
+    margin-bottom: 5px;
+  }
+  
+  .footer-text {
+    font-size: 13px;
+    color: #444;
+  }
+  
+  .footer-text .frase {
+    font-style: italic;
+    color: #008c4a; /* Verde corporativo */
+    font-weight: bold;
+  }   
   </style>
 </head>
 <body>
@@ -175,32 +200,35 @@
         <div><span>VALOR CUADRILLA URBANA:</span> <span id="totalUrbana">$ 0</span></div>
         <div><span>VALOR CUADRILLA RURAL:</span> <span id="totalRural">$ 0</span></div>
     </div>
-  <footer>
-  <div class="footer-container">
-    <img src="elite.png" alt="Logo Elite Ingenieros" class="footer-logo">
-    <span>© 2025 Elite Ingenieros S.A.S.</span>
-  </div>
-  </footer>
+      <footer>
+      <div class="footer-container">
+        <img src="elite.png" alt="Logo Elite Ingenieros" class="footer-logo">
+        <div class="footer-text">
+          <span>© 2025 Elite Ingenieros S.A.S.</span><br>
+          <span class="frase">Pasión por lo que hacemos.</span>
+        </div>
+      </div>
+    </footer>
   <script>
   const items = [
     
-    { codigo:"A02U/R", desc:"Actividad de conexión de acometida en cable cobre o aluminio a la red de distribución secundaria utilizando juego de conectores.", cliente:108551, cuadrillaU:68216, cuadrillaR:68216 },
-    { codigo:"A03U/R", desc:"Actividad de instalación y conexión de acometidas dentro de la caja multimedida a medidores prepago/pospago bicuerpo en alambre o cable con neutro concéntrico.", cliente:70290, cuadrillaU:38046, cuadrillaR:41356 },
-    { codigo:"A04U/R", desc:"Actividad de colocación de acometida aérea en cable cobre con neutro concéntrico (bifilar-Cu 2x8 AWG o trifilar-Cu 3x8 AWG).", cliente:147240, cuadrillaU:91267, cuadrillaR:91267 },
-    { codigo:"A05U/R", desc:"Actividad de colocación de acometida aérea en cable aluminio con neutro concéntrico (bifilar-Al 2x6 AWG o trifilar-Al 3x6 AWG).", cliente:157300, cuadrillaU:100648, cuadrillaR:100648 },
-    { codigo:"A06U/R", desc:"Actividad de colocación de acometida aérea en cable cobre con neutro concéntrico (bifilar-Cu 2x8 AWG o trifilar-Cu 3x8 AWG).", cliente:80719, cuadrillaU:59128, cuadrillaR:63768},
-    { codigo:"A07U/R", desc:"Actividad de colocación acometida aérea en cable de fuerza.", cliente:160799, cuadrillaU:90728, cuadrillaR:90728 },
-    { codigo:"A08U/R", desc:"Actividad de colocación de acometida subterránea en cable cobre con neutro concéntrico (bifilar-Cu 2x8 AWG o trifilar-Cu 3x8 AWG)", cliente:73678, cuadrillaU:43045, cuadrillaR:49836 },
-    { codigo:"A09U/R", desc:"Actividad de suministro y colocación de tubería PVC canalizada.", cliente:57349,cuadrillaU:49092, cuadrillaR:49092 },
-    { codigo:"A10U/R", desc:"Actividad de colocación de caja hermética para medidor monofásico, bifásico o trifásico en fachada o en poste.", cliente:121630, cuadrillaU:66509, cuadrillaR:71028},
-    { codigo:"A11U/R", desc:"Actividad de instalación de caja multimedidores  para alojar medidores prepagos/pospago (con suspensión o sin suspensión del servicio de energía).", cliente:0, cuadrillaU:95150, cuadrillaR:100190},
-    { codigo:"A12U/R", desc:"Actividad de Instalación de medidor de energía directa monofásico, bifásico o trifásico.", cliente:101129, cuadrillaU:53106, cuadrillaR:59688 },
-    { codigo:"A16U/R", desc:"Actividad de instalación de medidor POSPAGO/prepago bicuerpo (Norma RA8-020 o RA6-016) en la caja hermética individual o caja multimedidores.", cliente:227418, cuadrillaU:95537, cuadrillaR:106126 },
-    { codigo:"A17U/R", desc:"Colocación de breakers de 40 A monopolar 120 V o bipolar 240/120 V 10kA", cliente:15116, cuadrillaU:6739, cuadrillaR:7301},
-    { codigo:"A18U/R", desc:"Actividad de suministro y colocación de conductor de puesta a tierra en N°8 AWG (con varilla existente).", cliente:134740, cuadrillaU:68612, cuadrillaR:73142 },
-    { codigo:"A19U/R", desc:"Actividad de instalación de varilla de puesta a tierra (Incluye la instalación de la varilla y conector certificado).", cliente:62930, cuadrillaU:33072, cuadrillaR:36839 },
-    { codigo:"A20U/R", desc:"Actividad de suministro y colocación de tubería PVC de ¾”.", cliente:24298, cuadrillaU:15143, cuadrillaR:16011 },
-    { codigo:"A21U/R", desc:"Actividad de suministro y colocación de tubería TMG-IMC de ¾”.", cliente:49708, cuadrillaU:33610, cuadrillaR:35510 },
+    { codigo:"B01U/R", desc:"Instalación de breaker 20A, 10 kA, Monopolar.", cliente:6596, cuadrillaU:3977, cuadrillaR:3977 },
+    { codigo:"B02U/R", desc:"Instalación de breaker 30A, 10 kA, Monopolar.", cliente:7255, cuadrillaU:4375, cuadrillaR:4375 },
+    { codigo:"B03U/R", desc:"Suministro e instalación expuesta de cable flexible 3X10 AWG, tipo NM de cobre.", cliente:38655, cuadrillaU:20509, cuadrillaR:20509},
+    { codigo:"B04U/R", desc:"Suministro e instalación expuesta de cable flexible 3x12 AWG, tipo NM cobre.", cliente:30778, cuadrillaU:15510, cuadrillaR:15510},
+    { codigo:"B05U/R", desc:"Suministro e instalación de caja plástica empotrada 2x4,4x4 con tapa plus u octogonal.", cliente:13556, cuadrillaU:4940, cuadrillaR:5245},
+    { codigo:"B06U/R", desc:"Suministro e instalación de caja metálica troquelada expuesta 2x4,4x4 con tapa plus u octogonal.", cliente:12516, cuadrillaU:7438, cuadrillaR:7527},
+    { codigo:"B07U/R", desc:"Suministro e instalación expuesta de tomacorriente doble.", cliente:26176, cuadrillaU:105556, cuadrillaR:10905},
+    { codigo:"B08U/R", desc:"Suministro e instalación expuesta de portalámparas de loza.", cliente:24050,cuadrillaU:9521, cuadrillaR:10002 },
+    { codigo:"B09U/R", desc:"Suministro e instalación expuesta de interruptor manual(suiche).", cliente:31021, cuadrillaU:12277, cuadrillaR:12796},
+    { codigo:"B10U/R", desc:"Declaración de cumplimiento RETIE.", cliente:128970, cuadrillaU:79522, cuadrillaR:79522},
+    { codigo:"B11U/R", desc:"Instalación de aparatos(cajas,suiches,tomas,portalámparas).", cliente:8042, cuadrillaU:4860, cuadrillaR:4860},
+    { codigo:"B12U/R", desc:"Retiro de aparatos(cajas,suiches,tomas,portalámparas).", cliente:7985, cuadrillaU:4374, cuadrillaR:4374},
+    { codigo:"B13U/R", desc:"Suministro e instalación de alambre de cobre 10 AWG,THW.", cliente:10804, cuadrillaU:4830, cuadrillaR:4859},
+    { codigo:"B14U/R", desc:"Suministro e instalación de alambre de cobre 12 AWG,THW..", cliente:5638, cuadrillaU:3960, cuadrillaR:4014 },
+    { codigo:"B15U/R", desc:"Suministro e instalación expuesta de tomacorriente GFCI.", cliente:134487, cuadrillaU:263552, cuadrillaR:65888 },
+    { codigo:"B16U/R", desc:"Suministro e instalación expuesta de cable flexible 4x12 AWG, tipo NM cobre.", cliente:41455, cuadrillaU:20865, cuadrillaR:20865},
+    { codigo:"B17U/R", desc:"Instalación de tablero de distribución 4 circuitos expuesto o empotrado”.", cliente:110476, cuadrillaU:41562, cuadrillaR:45548 },
   ];
 
   const contenedor = document.getElementById("contenedor-items");
