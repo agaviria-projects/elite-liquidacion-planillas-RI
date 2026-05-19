@@ -215,11 +215,28 @@
 
   <div id="contenedor-items"></div>
      <div class="resumen">
-        <div><span>SUMA CANTIDADES:</span> <span id="sumaCantidades">0</span></div>
-        <div><span>VALOR ACTA EPM:</span> <span id="totalCliente">$ 0</span></div>
-        <div><span>VALOR CUADRILLA URBANA:</span> <span id="totalUrbana">$ 0</span></div>
-        <div><span>VALOR CUADRILLA RURAL:</span> <span id="totalRural">$ 0</span></div>
+
+    <div>
+        <span>SUMA CANTIDADES:</span>
+        <span id="sumaCantidades">0</span>
     </div>
+
+    <div>
+        <span>VALOR EPM:</span>
+        <span id="totalCliente">$ 0</span>
+    </div>
+
+    <div>
+        <span>I.V.A 19%:</span>
+        <span id="valorIVA">$ 0</span>
+    </div>
+
+    <div>
+        <span>TOTAL VALOR EPM + IVA:</span>
+        <span id="totalConIVA">$ 0</span>
+    </div>
+
+</div>
       <footer>
       <div class="footer-container">
         <img src="elite.png" alt="Logo Elite Ingenieros" class="footer-logo">
@@ -289,27 +306,36 @@
   }
 
   function actualizar() {
-    let sumaCant = 0, totalCli = 0, totalCuaU = 0, totalCuaR = 0;
+
+  let sumaCant = 0;
+  let totalCli = 0;
 
     items.forEach((it, i) => {
       const cant = parseFloat(document.getElementById(`cant-${i}`).value) || 0;
       sumaCant += cant;
 
       const totCli = cant * it.cliente;
-      const totCuaU = cant * it.cuadrillaU;
-      const totCuaR = cant * it.cuadrillaR;
+  
 
       totalCli += totCli;
-      totalCuaU += totCuaU;
-      totalCuaR += totCuaR;
+     
 
       document.getElementById(`totCliente-${i}`).innerText = cant > 0 ? formato(totCli) : "";
     });
 
+    const iva = totalCli * 0.19;
+    const totalFinal = totalCli + iva;
+    
     document.getElementById("sumaCantidades").innerText = sumaCant;
-    document.getElementById("totalCliente").innerText = formato(totalCli);
-    document.getElementById("totalUrbana").innerText = formato(totalCuaU);
-    document.getElementById("totalRural").innerText = formato(totalCuaR); 
+    
+    document.getElementById("totalCliente").innerText =
+      formato(totalCli);
+    
+    document.getElementById("valorIVA").innerText =
+      formato(iva);
+    
+    document.getElementById("totalConIVA").innerText =
+      formato(totalFinal);
   }
     function limpiarTodo() {
   // Poner todos los campos en blanco
@@ -321,8 +347,8 @@
   // Resetear los totales
   document.getElementById("sumaCantidades").innerText = "0";
   document.getElementById("totalCliente").innerText = "$ 0";
-  document.getElementById("totalUrbana").innerText = "$ 0";
-  document.getElementById("totalRural").innerText = "$ 0";
+  document.getElementById("valorIVA").innerText = "$ 0";
+  document.getElementById("totalConIVA").innerText = "$ 0";
 }
 </script>
 </body>
